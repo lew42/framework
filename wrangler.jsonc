@@ -1,0 +1,7 @@
+{
+  "name": "lew42-framework",
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "single-page-application"
+  }
+}

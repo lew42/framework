@@ -1,0 +1,148 @@
+@layer base, theme, util, ovr;
+
+@layer base {
+    *, *::before, *::after { box-sizing: border-box; }
+
+    /* html { scroll-behavior: smooth; } */
+    body { margin: 0; line-height: 1.5; font-family: system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; overflow-wrap: break-word; }
+    
+    img, picture, video, canvas, svg { display: block; max-width: 100%; }
+    input, button, textarea, select { font: inherit; } /* not just font-family, also font-size, etc. */
+    p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }
+
+    pre { overflow-x: auto; }
+    
+    ul, ol { padding-left: 1.2em; }
+
+    input:not([type="checkbox"], [type="radio"], [type="submit"], [type="color"], [type="button"], [type="reset"]), select, textarea {
+        width: 100%;
+    }
+}        
+
+@layer theme {
+    :root {
+        --prim: #5a57ff;
+	    --bg: #42404B;
+        --subtle: rgba(0,0,0,0.5);
+        
+        --column: 14em;
+    }
+    
+    :focus-visible {
+        /* outline: 2px solid var(--prim); don't do this, it messes with the outline's border radius??? */
+        outline-color: var(--prim);
+        outline-offset: 3px;
+        outline-width: 2px; /* doesn't seem to have an effect */
+    }
+
+    html { height: 100%; scrollbar-color: rgba(0, 0, 0, 0.2) transparent; }
+    
+    body { height: 100%; font-size: clamp(16px, 2vw, 20px); accent-color: var(--prim); }
+
+    .app { height: 100%; background: #ddd; /* overflow-x: hidden; overflow-y: scroll; */}
+    
+    /* h1, h2, h3, h4, h5, h6 { line-height: 1.2; margin: 1em 0; } */
+
+    hr { margin: 3em 0; }
+
+    pre, code { font-family: Consolas, 'Courier New', Monaco, monospace; }
+
+    input:not([type="checkbox"], [type="radio"], [type="color"]), select, textarea {
+        padding: 0.25em 0.6em;
+        border: 1px solid var(--subtle); /* adding a border affects input[type=submit] height and bg + hover, for some reason */
+    }
+
+    fieldset > p:first-of-type {
+        margin-top: 0;
+    }
+
+    select {     appearance: none;
+    background: field no-repeat 100%;
+    background-size: 0.5em;
+    background-origin: content-box;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='40' fill='%23555'><polygon points='0,0 60,0 30,40'/></svg>"); }
+
+    .btn, button { padding: 0.25em 1em; cursor: pointer; }
+    button.bg, .btn.bg { background: var(--bg); color: white; }
+    button.prim, .btn.prim { background: var(--prim); color: white; }
+
+}
+
+@layer util {
+
+    .pad { padding: 1em; }
+    .all-pad > * { padding: 1em; }
+    .mb { margin-bottom: 1em; }
+    
+    .flex { display: flex; }
+    .flex.wrap, .flex.auto, .flex.three { flex-wrap: wrap; }
+    .flex.auto > * { flex: 1 1 var(--column); }
+    .flex-1 { flex: 1; }
+    .flex.all-1 > * { flex: 1; }
+    .flex.v { flex-direction: column; }
+    .flex.reverse { flex-direction: row-reverse; }
+    .flex.h-center { justify-content: center; }
+    .flex.v-center { align-items: center; align-content: center; }
+    .flex.split { justify-content: space-between; }
+    .flex.three > * { flex: 1 1 calc(((var(--column) * 3) - 100%) * 999); }
+    .flex > * { margin: 0; }
+
+    .grid { display: grid; }
+    .grid.auto { grid-template-columns: repeat(auto-fit, minmax(min(var(--column), 100%), 1fr)); }
+    .grid.three { grid-template-columns: repeat(auto-fit, 
+		minmax(clamp(100% / 3 - 1rem, (var(--column)* 3 - 100%) * 999, 100%), 1fr)); }
+
+    .gap { gap: 1em; }
+    .gap-2em { gap: 2em; }
+
+    .zoom-25 { zoom: 0.25; }
+    .zoom-50 { zoom: 0.5; }
+    .zoom-75 { zoom: 0.75; }
+    .zoom-100 { zoom: 1; }
+    .zoom-125 { zoom: 1.25; }
+    .zoom-150 { zoom: 1.5; }
+    .zoom-175 { zoom: 1.75; }
+    .zoom-200 { zoom: 2; }
+    .zoom-responsive { zoom: clamp(0.5, calc(100vw / 40em), 1); }
+
+    .capitalize { text-transform: capitalize; }
+    .uppercase { text-transform: uppercase; }
+
+    textarea.auto { field-sizing: content;}
+
+    .viz, .viz * {
+        background: rgba(0, 0, 0, 0.1);
+        outline: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    .viz:hover, .viz *:hover {
+        background: rgba(0, 0, 0, 0.2);
+        outline: 1px solid rgba(0, 0, 0, 0.4);
+    }
+
+    .dark { /* Can't easily have .dark.viz on same el */
+        .viz, .viz * {
+            background: rgba(255, 255, 255, 0.2);
+            outline: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .viz:hover, .viz *:hover {
+            background: rgba(255, 255, 255, 0.4);
+            outline: 1px solid rgba(255, 255, 255, 0.8);
+        }
+    }
+}
+
+@layer ovr {
+
+    .mb-0 { margin-bottom: 0; }
+    .ml-auto { margin-left: auto; }
+    .mr-auto { margin-right: auto; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+
+    :first-child { margin-top: 0; }
+    :last-child { margin-bottom: 0; }
+
+    .dark, .all-dark > * { color: white; background: var(--bg); }
+    .light { background: #eee; color: var(--bg); }
+}
