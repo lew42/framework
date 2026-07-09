@@ -39,7 +39,7 @@
     
     body { height: 100%; font-size: clamp(16px, 2vw, 20px); accent-color: var(--prim); }
 
-    .app { height: 100%; background: #ddd; /* overflow-x: hidden; overflow-y: scroll; */}
+    .app { height: 100%; }
     
     /* h1, h2, h3, h4, h5, h6 { line-height: 1.2; margin: 1em 0; } */
 

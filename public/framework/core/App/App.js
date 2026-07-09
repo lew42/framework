@@ -1,4 +1,5 @@
 import { el, div, View, h1, h2, h3, p, is } from "../View/View.js";
+import Socket from "../../dev/Socket/Socket.js";
 
 // this needs to load immediately, so the layers are properly defined
 View.stylesheet(import.meta, "../../framework.css");
@@ -21,7 +22,9 @@ export default class App {
 	}
 
 	// 1. initial setup, requests
-	config() {}
+	config() {
+		this.config_socket();
+	}
 
 	// 2. pre-render before page.js loading
 	render() {
@@ -46,6 +49,13 @@ export default class App {
 	// 5. inject this.$app into <body>
 	inject() {
 		this.$body.append(this.$app);
+	}
+
+	config_socket(){
+		const h = window.location.hostname;
+        if (h === "localhost" || h === "127.0.0.1" || h.endsWith(".localhost")) {
+            this.socket = Socket.singleton();
+        }
 	}
 
 	async load_page() { // 3
