@@ -6,56 +6,46 @@ View.stylesheet(import.meta, "../../framework.css");
 export default class App {
 
 	constructor(...args) {
-		this.loaders = [];
+		this.loaders = []; // stylesheets and fonts (promises)
 		this.assign(...args);
 		this.instantiate();
 	}
 
 	async instantiate() {
-		this.config();
-		await this.load();
-		this.initialize();
+		this.config(); // 1
+		this.render(); // 2
+		await this.load(); // 3
+		this.initialize(); // 4
+		this.inject(); // 5
+		this.ready.resolve(); // 6
 	}
 
-	// initial setup, requests, render app
-	config() {
-		this.config_framework();
+	// 1. initial setup, requests
+	config() {}
 
-		// render *before* loading the page
-		this.render();
-	}
-
-	// request and await the page, and then all the loaders
-	async load() {
-		// wait until page module has finished
-		await this.load_page();
-
-		// page module can add additional loaders
-		await this.loaded;
-	}
-
-	initialize() {
-		// put the app in the dom
-		this.inject();
-
-		// app.ready!
-		this.ready.resolve();
-	}
-
-	config_framework() {
-		// I think this should be done immediately (see above)
-		// this.stylesheet(import.meta, "../../framework.css");
-	}
-
-	assign(...args) {
-		return Object.assign(this, ...args);
-	}
-
+	// 2. pre-render before page.js loading
 	render() {
 		this.$body = View.body();
 		this.$app = div.c("app");
 
 		View.set_captor(this.$app);
+	}
+
+	// 3. request and await the page, and then all the loaders
+	async load() {
+		// wait until page module has finished
+		await this.load_page();
+
+		// page module can add additional loaders (stylesheets, fonts)
+		await this.loaded;
+	}
+
+	// 4. post render, pre-dom-injection
+	initialize() {}
+
+	// 5. inject this.$app into <body>
+	inject() {
+		this.$body.append(this.$app);
 	}
 
 	async load_page() { // 3
@@ -82,10 +72,6 @@ export default class App {
 				console.error(error);
 			});
 		}
-	}
-
-	inject() {
-		this.$body.append(this.$app);
 	}
 
 	// loads a predefined font (see Font class below)
@@ -122,6 +108,10 @@ export default class App {
 
 	get loaded() {
 		return Promise.all(View.stylesheets.concat(this.loaders));
+	}
+	
+	assign(...args) {
+		return Object.assign(this, ...args);
 	}
 
 	static stylesheet(meta, url) {
