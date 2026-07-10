@@ -3,7 +3,7 @@ import { h2, p, el, a } from "/app.js";
 export default { 
     
     link(){
-        return a.c("page-link", "A").href("/path-1/a/"); // abs path? !! MUST RETURN
+        return a.c("page-link", "/path-1/a/").href("/path-1/a/"); // abs path? !! MUST RETURN
     },
 
     render(){

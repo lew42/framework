@@ -1,10 +1,11 @@
-import { h2, p } from "/app.js";
-import a from "./a/page.js";
+import { h2, p, a } from "/app.js";
+import page_a from "./a/page.js";
 import b from "./b/page.js";
 
 export default { 
     preview(){
-        h2("This is /path/");
+        a("Home").href("/");
+        h2("This is /path-2/");
         p("This could be a preview, but this page might not need one.");
     },
 
@@ -14,7 +15,7 @@ export default {
 
     content(){
         p("This is the full content.  There's `a.preview()` below:");
-        a.preview();
+        page_a.preview();
         p("There's `b.preview()` below:");
         b.preview();
     },

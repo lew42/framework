@@ -1,11 +1,12 @@
 import { h2, p, el, a } from "/app.js";
 
 export default { 
+    href: "/path-2/a/",
     preview(){
         a.c("page-link-block", () => {
-            h2("Path / A");
-            p("This is the preview sub page A.");
-        }).href("/path/a/");
+            h2(this.href);
+            p("This is the preview for " + this.href + ".");
+        }).href(this.href);
     },
 
     render(){
@@ -13,7 +14,7 @@ export default {
     },
 
     content(){
-        p("This is the rest of the content for /path/a/");
+        p("This is the rest of the content for " + this.href + ".");
     },
 
     full(){
