@@ -1,3 +1,5 @@
 body { background: #ddd; }
 
 .app { margin: 2em auto; max-width: 60em; background: white; box-shadow: 0 0 1em rgba(0,0,0,0.1); padding: 2em; }
+
+.page-link-block { background: rgba(0,0,0,0.1); display: block; padding: 1em; margin-bottom: 1em; }

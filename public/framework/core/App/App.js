@@ -71,14 +71,14 @@ export default class App {
 
 			// render the page
 			if (this.page) {
-				this.$root.append(this.page);
+				this.$app.append(this.page);
 				// this.$root is not in the body yet
 			}
 		} catch (error) {
 			// this runs on any page error...
-			this.$root.append(() => {
+			this.$app.append(() => {
 				h1("Page Load Error");
-				pre.c("error", error.message);
+				el.c("pre", "error", error.message);
 				console.error(error);
 			});
 		}
