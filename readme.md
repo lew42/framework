@@ -9,16 +9,16 @@
 
 ## Cloudflare Previews
 
-The current `main` branch is deployed at: https://framework.lew42.workers.dev/
+The current `main` branch is deployed at: https://monorepo.lew42.workers.dev/
 
 My team has been invited to this repo as Collaborators.  If you accept, you should be able to:
 
 1. Clone this repo (no need to fork).
 2. You cannot push to main.
-3. Make a branch (`git switch -c <branch-name>`), use your name.
+3. Make a branch (`git switch -c <yourname>/<branch-name>`), use your name, like `michael/fix-whatever`.
 4. Make a change, and `git push`.
 5. You should have push privilege, so it should work.
-6. Cloudflare will automatically build your branch, and host at <yourname>-framework.lew42.workers.dev
+6. Cloudflare will automatically build your branch, and convert the branch name from `michael/fix-whatever` to `michael-fix-whatever` (notice `/` becomes `-`) and host at `michael-fix-whatever-monorepo.lew42.workers.dev`
 
 For example, my branch is: https://michael-framework.lew42.workers.dev/ (notice the `-`, it's not a `.`)
 
