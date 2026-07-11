@@ -1,0 +1,13 @@
+import { div, p, a, span } from '/app.js';
+import branches from './branches/page.js';
+import root from '../page.js';
+
+export default {
+  link() {
+    return a.c("page-link", "trunk").href("/castin/root/trunk/")
+  },
+  render() {
+    p("Rising steady, I carry the weight of these darn ", branches.link());
+    p("Let's go back to the ", root.link());
+  }
+}
