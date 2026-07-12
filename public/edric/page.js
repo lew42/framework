@@ -5,6 +5,8 @@ import d from "./d/page.js";
 import e from "./e/page.js";
 import HTML from "./HTML/page.js";
 
-p("Edric's Page");
-h2("This is /edric/");
-p("Sub pages: ", HTML.link(), ", ", b.link(), ", ", c.link(), ", ", d.link(), ", and ", e.link());
+export default function() {
+    p("Edric's Page");
+    h2("This is /edric/");
+    p("Sub pages: ", HTML.link(), ", ", b.link(), ", ", c.link(), ", ", d.link(), ", and ", e.link());
+}
