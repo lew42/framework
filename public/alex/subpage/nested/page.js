@@ -7,7 +7,6 @@ export default {
   },
   preview() {
     a.c("page-link-block", () => {
-      a.c("page-back", "Back").href("../");
       h2("Preview");
       p("Preview text");
     }).href(this.href);
@@ -17,6 +16,7 @@ export default {
     p("Nested subpage content");
   },
   full() {
+    a.c("page-back", "Back").href("../");
     this.preview();
     this.content();
   },
