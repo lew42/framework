@@ -1,4 +1,5 @@
 import { a, h2, p } from "/app.js";
+import subpage from "./subpage/page.js";
 
 export default {
   render() {
