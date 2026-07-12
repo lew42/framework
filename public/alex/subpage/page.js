@@ -1,4 +1,4 @@
-import { a, h2, p } from "/app.js";
+import { a, h2, h3, p } from "/app.js";
 import nested from "./nested/page.js"
 
 export default {
@@ -8,6 +8,8 @@ export default {
   render() {
     a.c("page-back", "Back").href("../");
     h2("Alex's subpage");
+    h3("Preview");
+    nested.preview();
     p("Subpage content with a nested subpage: ", nested.link());
   },
 };

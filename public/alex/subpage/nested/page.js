@@ -4,9 +4,20 @@ export default {
   link() {
     return a.c("page-link", "/alex/subpage/nested/").href("/alex/subpage/nested/");
   },
-  render() {
+  preview() {
     a.c("page-back", "Back").href("../");
-    h2("Alex's subpage");
+    h2("Preview");
+    p("Preview text");
+  },
+  content() {
+    h3("Alex's subpage");
     p("Nested subpage content");
+  },
+  full() {
+    this.preview();
+    this.content();
+  },
+  render() {
+    this.full();
   },
 };
