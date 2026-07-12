@@ -1,13 +1,16 @@
 import { a, h2, p } from "/app.js";
 
 export default {
+  href: "/alex/subpage/nested/",
   link() {
-    return a.c("page-link", "/alex/subpage/nested/").href("/alex/subpage/nested/");
+    return a.c("page-link", this.href).href("/alex/subpage/nested/");
   },
   preview() {
-    a.c("page-back", "Back").href("../");
-    h2("Preview");
-    p("Preview text");
+    a.c("page-link-block", () => {
+      a.c("page-back", "Back").href("../");
+      h2("Preview");
+      p("Preview text");
+    }).href(this.href);
   },
   content() {
     h3("Alex's subpage");
