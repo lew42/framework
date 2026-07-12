@@ -1,7 +1,8 @@
-import { a, p } from "/app.js";
+import { a, h2, p } from "/app.js";
+
 export default {
   link() {
-    return a.c("page-link", "/path-1/a/").href("/path-1/a/");
+    return a.c("page-link", "/alex/").href("/alex/");
   },
   render() {
     a.c("page-back", "Back").href("../");
