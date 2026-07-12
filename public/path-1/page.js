@@ -2,7 +2,7 @@ import { h2, p, a } from "/app.js";
 import page_a from "./a/page.js"; // "a" was taken
 import b from "./b/page.js";
 
-export default function(){
+export default function() {
     a("Home").href("/");
     h2("This is /path-1/");
     p("There are two sub pages: ", page_a.link(), " and ", b.link());
