@@ -3,7 +3,7 @@ import nested from "./nested/page.js"
 
 export default {
   link() {
-    return a.c("page-link", "/alex/").href("/alex/");
+    return a.c("page-link", "/alex/subpage/").href("/alex/subpage/");
   },
   render() {
     a.c("page-back", "Back").href("../");
