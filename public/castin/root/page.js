@@ -2,6 +2,8 @@ import { p, a } from '/app.js';
 import trunk from './trunk/page.js';
 import home from '../page.js';
 
+app.$body.ac("theme-1");
+
 export default {
   link() {
     return a.c("page-link", "root").href("/castin/root/")

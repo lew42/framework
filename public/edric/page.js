@@ -5,6 +5,8 @@ import d from "./d/page.js";
 import e from "./e/page.js";
 import HTML from "./HTML/page.js";
 
+app.$body.ac("theme-1");
+
 export default function() {
     p("Edric's Page");
     h2("This is /edric/");

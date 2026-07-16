@@ -1,6 +1,8 @@
 import { a, h2, h3, p } from "/app.js";
 import nested from "./nested/page.js"
 
+app.$body.ac("theme-1");
+
 export default {
   link() {
     return a.c("page-link", "/alex/subpage/").href("/alex/subpage/");

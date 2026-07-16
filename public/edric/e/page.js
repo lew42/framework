@@ -1,5 +1,7 @@
 import { p, a } from "/app.js";
 
+app.$body.ac("theme-1");
+
 export default {
 
     link(){

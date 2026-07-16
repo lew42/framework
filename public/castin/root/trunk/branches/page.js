@@ -2,6 +2,8 @@ import { p, a, span } from '/app.js';
 import leaves from './leaves/page.js';
 import trunk from '../page.js';
 
+app.$body.ac("theme-1");
+
 export default {
   link() {
     return a.c("page-link", "branches").href("/castin/root/trunk/branches/")
