@@ -2,6 +2,8 @@ import { div, p, a, span } from '/app.js';
 import branches from './branches/page.js';
 import root from '../page.js';
 
+app.$body.ac("theme-1");
+
 export default {
   link() {
     return a.c("page-link", "trunk").href("/castin/root/trunk/")

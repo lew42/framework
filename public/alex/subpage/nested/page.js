@@ -1,5 +1,7 @@
 import { a, h2, h3, p } from "/app.js";
 
+app.$body.ac("theme-1");
+
 export default {
   href: "/alex/subpage/nested/",
   link() {

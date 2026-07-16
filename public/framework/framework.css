@@ -1,4 +1,4 @@
-@layer base, theme, util, ovr;
+@layer base, theme, util;
 
 @layer base {
     *, *::before, *::after { box-sizing: border-box; }
@@ -108,41 +108,5 @@
     .capitalize { text-transform: capitalize; }
     .uppercase { text-transform: uppercase; }
 
-    textarea.auto { field-sizing: content;}
-
-    .viz, .viz * {
-        background: rgba(0, 0, 0, 0.1);
-        outline: 1px solid rgba(0, 0, 0, 0.2);
-    }
-
-    .viz:hover, .viz *:hover {
-        background: rgba(0, 0, 0, 0.2);
-        outline: 1px solid rgba(0, 0, 0, 0.4);
-    }
-
-    .dark { /* Can't easily have .dark.viz on same el */
-        .viz, .viz * {
-            background: rgba(255, 255, 255, 0.2);
-            outline: 1px solid rgba(255, 255, 255, 0.4);
-        }
-
-        .viz:hover, .viz *:hover {
-            background: rgba(255, 255, 255, 0.4);
-            outline: 1px solid rgba(255, 255, 255, 0.8);
-        }
-    }
-}
-
-@layer ovr {
-
-    .mb-0 { margin-bottom: 0; }
-    .ml-auto { margin-left: auto; }
-    .mr-auto { margin-right: auto; }
-    .mx-auto { margin-left: auto; margin-right: auto; }
-
-    :first-child { margin-top: 0; }
-    :last-child { margin-bottom: 0; }
-
-    .dark, .all-dark > * { color: white; background: var(--bg); }
-    .light { background: #eee; color: var(--bg); }
+    textarea.auto { field-sizing: content;} /* textarea height resizes to fit content */
 }

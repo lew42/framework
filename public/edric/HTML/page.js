@@ -2,6 +2,8 @@ import { h2, p, a } from "/app.js";
 import other from "./other/page.js";
 import input from "./input/page.js";
 
+app.$body.ac("theme-1");
+
 export default {
 
     link(){

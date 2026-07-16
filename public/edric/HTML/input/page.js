@@ -1,5 +1,7 @@
 import app, { p, a, fieldset, legend, input, button, article, footer, div, append, pre, code } from "/app.js";
 
+app.$body.ac("theme-1");
+
 export default {
 
     link(){

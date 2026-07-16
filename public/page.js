@@ -1,32 +1,31 @@
 import app, { el, div, p, h1, h2, a, code } from "/app.js";
+import nav from "/nav.js";
+
+app.$body.ac("theme-1");
+
+nav();
 
 h1("Hello World");
 
-p("The new github repo: ", a("https://github.com/lew42/monorepo").href("https://github.com/lew42/monorepo"))
+p("The GitHub repo: ", a("https://github.com/lew42/monorepo").href("https://github.com/lew42/monorepo"))
 
-p("The new Cloudflare URL: ", a("https://monorepo.lew42.workers.dev").href("https://monorepo.lew42.workers.dev"));
+p("The Cloudflare URL: ", a("https://monorepo.lew42.workers.dev").href("https://monorepo.lew42.workers.dev"));
 
-h2("Git Branch Names");
-p("Use `<yourname>/<branch-name>` for git branches, for example, `michael/new-page`.  Always `git switch main` and `git pull` to make sure you're up to date.  Then `git switch -c michael/new-page` to make a new branch.  These will be short-lived branches, just to get the code merged, and then you repeat (switch to main, new branch, etc).")
-p("You can delete old branches via `git branch -D <branch-name>`, which would be like `git branch -D michael/new-page`, for example.  You would do this if you wanted to reuse the branch name.")
-p("The new dev URLs will convert the `/` to `-`, so you'll have: ");
-p("`https://<yourname>-<branch>-monorepo.lew42.workers.dev`, like:");
-p(a("https://michael-new-page-monorepo.lew42.workers.dev").href("https://michael-new-page-monorepo.lew42.workers.dev"));
 
-p("I know this is all pretty confusing, but I think it'll work.  Basically:");
-
-el("ul", () => {
-    el("li", code("michael/new-page"), " for ", el("strong", "git branch names"));
-    el("li", code("michael-new-page-monorepo.lew42.workers.dev"), " for ", el("strong", "Cloudflare previews"));
-});
-
-p("In case your wondering, why `<name>/<branch>`?  It's because GitHub will group branches by `/`, so if you push several branches, it'll group them.  Maybe not worth the confusion, but we're going to give it a shot.")
-
-p("Before, I was thinking you'd each have a dedicated `<name>` branch, and a permanent `<name>-monorepo.lew42.workers.dev` preview site.  And that could work, but long-lived branches are way more susceptible to merge conflicts.  This way, each branch is temporary, and we start fresh after `git switch main` and `git pull`.")
 h2("Next Task");
 
-p("Create your `/<name>/` pages (`/<name>/page.js`), this time, we'll merge them all into `main`.")
+p("All pages have been merged into main.  Make sure to `git switch main` and `git pull` before re-branching.")
 
-p("Check out ", a("path-1").href("/path-1/"), " and ", a("path-2").href("/path-2/"), ".  We need to think about pages, importing pages, sub pages, page previews, and navigation.  Try to use these patterns to create your own sub pages or page previews.  I'm out of time, this'll have to do for now, good luck!");
+p("For this next project, you can use your 5 hours for the week, but please try to make it worthwhile!");
 
-p("Push your `<name>/new-page` branch, or whatever you called it, and it should auto deploy.  Send me the link, same as usual!  Thanks!!");
+p("Inside your `/<name>/` directories, you should make `/<name>/framework/` and `/<name>/styles/` to start documenting the basic framework usage (basically just `class View` and `class App`), and basic styles (html, forms, flex, grid.  See the `framework.css` and see if you can build something with these styles).  You can make note of any framework improvements you would suggest, as you go.  Try to focus on the new user experience, what are the basic things they need to know to use this framework?");
+
+p("My goal has always been for this framework to be the simplest, easiest way to get started with web development, and I think we're pretty close.  However, as you have seen, just getting basic pages and navigation to work is a bit tricky.  Let's focus on the new-user experience here.  If we want more users (newbies and pros) to contribute, how do we make this look and feel better?  Simpler, cleaner, better.")
+
+p("Your directory is your place to build.  Don't modify files outside of your directory.  Notice I added `app.$body.ac('theme-1')` to all pages and sub pages.  This is so, by default, there are only `framework.css` styles, and everything is opt-in.  I like this minimalism approach.  You can create your own stylesheets, and import them with `app.stylesheet('/<name>/styles.css')`.  You can create your own classes and either extend View or just create a class with a `.render()` method.");
+
+p("If you're feeling ambitious, you could try to create a `class Page`.  I've tried a few times, but it's tricky.  Right now, we can just put `p()` inside a `page.js`, but that means you can't import that `page.js` without it auto-rendering.  Creating a `history.pushState()` router is another goal, but figuring out how/when to activate and load pages dynamically is another trick. Anyway, I gtg, good luck!")
+
+h2("Notes");
+
+a("Git Branch Names").href("/notes/git-branch-names");
