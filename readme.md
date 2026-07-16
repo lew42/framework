@@ -20,10 +20,32 @@ Git branch names will have `/` converted to `-` for preview URLs, which is impor
 My team has been invited to this repo as Collaborators.  If you accept, you should be able to:
 
 1. Clone this repo (no need to fork).
-2. You cannot push to main.
-3. Make a branch (`git switch -c <yourname>/<branch-name>`), use your name, like `michael/fix-whatever`.
-4. Make a change, and `git push`.  You should have push privilege, so it should work.
-5. Cloudflare will automatically build your branch, and convert the branch name from `michael/fix-whatever` to `michael-fix-whatever` (notice `/` becomes `-`) and host at `michael-fix-whatever-monorepo.lew42.workers.dev`
+2. You **cannot** push to `main` branch.
+3. **Always** `git switch main` and `git pull` before creating a new branch.
+4. Make a branch (`git switch -c <yourname>/<branch-name>`), use your name, like `michael/fix-whatever`.
+5. Make a change, add, commit, and `git push`.  You should have push privilege, so it should work.
+6. Cloudflare will automatically build your branch, and convert the branch name from `michael/fix-whatever` to `michael-fix-whatever` (notice `/` becomes `-`) and publish it at `michael-fix-whatever-monorepo.lew42.workers.dev`
+
+## Again:
+
+For every new task, we make a new `<yourname>/<branch-name>` git branch.  But first, we:
+- `git switch main`
+- `git pull`
+- `git switch -c <yourname>/<branch-name>` to create a new branch
+- `git add .` and `git commit -m "whatever"` and `git push`
+- Cloudflare auto-builds the preview URL based on the branch name, send me the link.
+
+Note, you'll either need to `git push -u origin <yourname>/<branch-name>` the first time, or you can set this:
+
+`git config push.autoSetupRemote true`
+
+And then `git push` should just automatically push.  Alternatively, you can set it globally:
+
+`git config --global push.autoSetupRemote true`
+
+so you don't have to set it per-project.
+
+
 
 ## Load Order (tracing each browser request through the app.js -> page.js)
 

@@ -2,6 +2,8 @@ import app, { el, div, p, h1, h2, a, code } from "/app.js";
 
 h1("Hello World");
 
+p("The new github repo: ", a("https://github.com/lew42/monorepo").href("https://github.com/lew42/monorepo"))
+
 p("The new Cloudflare URL: ", a("https://monorepo.lew42.workers.dev").href("https://monorepo.lew42.workers.dev"));
 
 h2("Git Branch Names");
