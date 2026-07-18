@@ -5,11 +5,11 @@ app.$body.ac("theme-1");
 export default {
 
     link(){
-        return a.c("page-link", "/edric/d/").href("/edric/d/"); // abs path? !! MUST RETURN
+        return a.c("page-link", "other").href("/edric/style/HTML/other/"); // abs path? !! MUST RETURN
     },
 
     render(){
         a.c("page-back", "Back").href("../");
-        p("This is the rest of the content for d");
+        p("Great things will be build here");
     }
 }

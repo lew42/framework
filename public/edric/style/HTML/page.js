@@ -7,7 +7,7 @@ app.$body.ac("theme-1");
 export default {
 
     link(){
-        return a.c("page-link", "HTML").href("/edric/HTML/"); // abs path? !! MUST RETURN
+        return a.c("page-link", "HTML").href("/edric/style/HTML/"); // abs path? !! MUST RETURN
     },
 
     render(){
