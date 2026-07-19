@@ -154,12 +154,13 @@ export default class App {
 		return [path + ".page.js", path + "/page.js"];
 	}
 
-	// return the first candidate URL that actually exists (HEAD 200), or null
+	// return the first candidate URL that resolves the module, or null
 	static async resolve_page_url(candidates) {
 		for (const url of candidates) {
 			try {
 				const res = await fetch(url, { method: "HEAD" });
-				if (res.ok) return url;
+				const type = res.headers.get("content-type") || "";
+				if (res.ok && type.includes("javascript")) return url;
 			} catch (error) {
 				// network error: try the next candidate
 			}
