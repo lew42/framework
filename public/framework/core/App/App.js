@@ -59,12 +59,22 @@ export default class App {
 	}
 
 	async load_page() { // 3
-		// "/" -> "/page.js"
-		// "/path/" -> "/path/page.js"
-		// "/path/sub" -> "/path/sub.page.js"
+		// "/"          -> "/page.js"
+		// "/path/"     -> "/path/page.js"
+		// "/path/sub"  -> "/path/sub.page.js"  (file page)  OR
+		//                 "/path/sub/page.js"  (dir page, slash-less)
+		const candidates = App.path_to_page_urls(window.location.pathname);
+
+		// probe candidates in order; the first that exists is the page
+		const url = await App.resolve_page_url(candidates);
+
+		if (!url) {
+			console.error("Page not found", candidates.join(", "))
+			return;
+		}
 
 		try {
-			const mod = await import(App.path_to_page_url(window.location.pathname));
+			const mod = await import(url);
 
 			// the page.js can, but doesn't need to export a default
 			this.page = mod.default;
@@ -95,7 +105,10 @@ export default class App {
 		}
 
 		const font = new Font(Font.fonts[name]);
-		const loaded = font.load(); // promise
+		// a failed font does not hang the app
+		const loaded = font.load().catch((error) => {
+			console.error("Font load error");
+		});
 		this.loaders.push(loaded); // save the promise
 		Font.fonts[name].font = font; // cache the font
 		return loaded; // allow await app.font(...)
@@ -128,17 +141,31 @@ export default class App {
 		return View.stylesheet(meta, url);
 	}
 
-	static path_to_page_url(path) {
-		// "/" -> "/page.js"
-		// "/path/" -> "/path/page.js"
+	// A page can be authored two ways, so a slash-less URL has two candidates:
+	//   file page: "/path/sub"  -> "/path/sub.page.js"
+	//   dir  page: "/path/sub"  -> "/path/sub/page.js"  (same as "/path/sub/")
+	// A trailing slash is unambiguous: it's always a directory page.
+	static path_to_page_urls(path) {
+		// "/" -> "/page.js", "/path/" -> "/path/page.js"
 		if (path.endsWith("/")) {
-			return path + "page.js";
-
-			// "/sub" -> "/sub.page.js" or
-			// "/path/sub" -> "/path/sub.page.js"
-		} else {
-			return path + ".page.js";
+			return [path + "page.js"];
 		}
+		// slash-less: prefer the file page, fall back to the dir page
+		return [path + ".page.js", path + "/page.js"];
+	}
+
+	// return the first candidate URL that resolves the module, or null
+	static async resolve_page_url(candidates) {
+		for (const url of candidates) {
+			try {
+				const res = await fetch(url, { method: "HEAD" });
+				const type = res.headers.get("content-type") || "";
+				if (res.ok && type.includes("javascript")) return url;
+			} catch (error) {
+				// network error: try the next candidate
+			}
+		}
+		return null;
 	}
 
 	static meta_path(meta, path) {
