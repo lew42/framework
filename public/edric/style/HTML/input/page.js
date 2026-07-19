@@ -5,7 +5,7 @@ app.$body.ac("theme-1");
 export default {
 
     link(){
-        return a.c("page-link", "input").href("/edric/HTML/input/");
+        return a.c("page-link", "input").href("/edric/style/HTML/input/");
     },
 
     render(){
@@ -111,7 +111,7 @@ p(() => {
                     p("Placeholder");
 
                     input().attr("placeholder", "Type here...");
-                    p("`input().attr(\"placeholder\", \"Type here...\")` — shows greyed-out hint text inside an empty input. It disappears once the user types, and is never submitted as a value (unlike `.attr(\"value\", ...)`).");
+                    p("`input().attr(\"placeholder\", \"Type here...\")`:shows greyed-out hint text inside an empty input. It disappears once the user types, and is never submitted as a value (unlike `.attr(\"value\", ...)`).");
                 }).style({
                     border: "1px solid var(--subtle)",
                     "border-radius": "0.3em",
@@ -126,19 +126,19 @@ p(() => {
                 legend("Action buttons");
                 p(() => {
                     button("<button type=submit>").attr("type", "submit");
-                    p("`<button type=\"submit\">` — submits the parent form.").style("margin-bottom", "2em");
+                    p("`<button type=\"submit\">`:submits the parent form.").style("margin-bottom", "2em");
                     append(" ");
 
                     button("<button type=button>").attr("type", "button");
-                    p("`<button type=\"button\">` — does nothing on its own; needs a JS click handler.").style("margin-bottom", "2em");
+                    p("`<button type=\"button\">`:does nothing on its own; needs a JS click handler.").style("margin-bottom", "2em");
                     append(" ");
 
                     button("<button type=reset>").attr("type", "reset");
-                    p("`<button type=\"reset\">` — resets the form back to its default values.").style("margin-bottom", "2em");
+                    p("`<button type=\"reset\">`:resets the form back to its default values.").style("margin-bottom", "2em");
                     append(" ");
 
                     button("<button disabled>").attr("type", "button").attr("disabled", "");
-                    p("`<button disabled>` — unclickable, excluded from form submission.").style("margin-bottom", "2em");
+                    p("`<button disabled>`:unclickable, excluded from form submission.").style("margin-bottom", "2em");
                 });
             });
         });
