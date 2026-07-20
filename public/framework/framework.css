@@ -21,6 +21,7 @@
     input:not([type="checkbox"], [type="radio"], [type="submit"], [type="color"], [type="button"], [type="reset"]), select, textarea {
         width: 100%;
     }
+    textarea { max-width: 100%;resize: vertical; }
 }        
 
 @layer theme {
