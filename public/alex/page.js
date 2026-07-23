@@ -1,11 +1,17 @@
-import { a, h2, p } from "/app.js";
+import app, { h2, p, Page } from "/app.js";
 import subpage from "./subpage/page.js";
 
-app.$body.ac("theme-1");
+export default new class AlexPage extends Page {
+	title = "Alex";
 
-export default {
-  render() {
-    h2("Alex's page");
-    p("Content example with a subpage: ", subpage.link())
-  },
-};
+	on_activate() {
+		super.on_activate();
+		document.documentElement.lang = "en";
+	}
+
+	render() {
+		app.$body.ac("theme-1");
+		h2("Alex's page");
+		p("Content example with a subpage: ", subpage.link());
+	}
+}

@@ -1,5 +1,7 @@
 import { el, div, View, h1, h2, h3, p, is } from "../View/View.js";
 import Socket from "../../dev/Socket/Socket.js";
+import Page from "../Page/Page.js";
+import Router from "../Router/Router.js";
 
 // this needs to load immediately, so the layers are properly defined
 View.stylesheet(import.meta, "../../framework.css");
@@ -24,6 +26,7 @@ export default class App {
 	// 1. initial setup, requests
 	config() {
 		this.config_socket();
+		this.router = new Router(this);
 	}
 
 	// 2. pre-render before page.js loading
@@ -58,30 +61,9 @@ export default class App {
         }
 	}
 
+	// the router handles the initial page load like any other navigation
 	async load_page() { // 3
-		// "/" -> "/page.js"
-		// "/path/" -> "/path/page.js"
-		// "/path/sub" -> "/path/sub.page.js"
-
-		try {
-			const mod = await import(App.path_to_page_url(window.location.pathname));
-
-			// the page.js can, but doesn't need to export a default
-			this.page = mod.default;
-
-			// render the page
-			if (this.page) {
-				this.$app.append(this.page);
-				// this.$root is not in the body yet
-			}
-		} catch (error) {
-			// this runs on any page error...
-			this.$app.append(() => {
-				h1("Page Load Error");
-				el.c("pre", "error", error.message);
-				console.error(error);
-			});
-		}
+		this.page = await this.router.show(window.location.pathname, { initial: true });
 	}
 
 	// loads a predefined font (see Font class below)
@@ -175,5 +157,5 @@ Font.fonts = {
 	}
 };
 
-export { App };
+export { App, Page, Router };
 export * from "../View/View.js";
